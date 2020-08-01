@@ -31,6 +31,8 @@ class _QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
+  List<bool> answers = [false, true, true];
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[0],
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -69,12 +71,25 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  listOfIcons.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
+                  if (answers[questionNumber] == true) {
+                    listOfIcons.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );
+                  } else {
+                    listOfIcons.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
+                  }
+                  if(questionNumber<2){
+                    questionNumber++;
+                  }
+
                 });
               },
             ),
@@ -94,12 +109,24 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  listOfIcons.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
+                  if (answers[questionNumber] == false) {
+                    listOfIcons.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );
+                  } else {
+                    listOfIcons.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
+                  }
+                  if(questionNumber<2){
+                    questionNumber++;
+                  }
                 });
               },
             ),
